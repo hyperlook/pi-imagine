@@ -41,5 +41,5 @@ description: 使用 search_prompt_cases 检索黄金案例、使用 image_gen / 
    - 具名真人或特定物理商品，先检索获取真实参考图后走 `image_edit`。
 
 4. **参数规范 (Parameters)**：
-   - 比例 `aspect_ratio`：手机竖图用 `9:16`，电脑横幅用 `16:9`，头像/图标用 `1:1`，通用场景用 `auto`；
-   - 默认走 `grok-imagine-image-quality` 引擎，兼顾极高画质与锐利文字排版。
+   - 比例 `aspect_ratio`：默认 `auto`（模型根据提示词语义自动选择最适画幅，如识别 prompt 中的 widescreen/portrait 关键词）；固定画幅可选：`1:1`（方形头像/图标）、`16:9`（横幅壁纸/视频封面）、`9:16`（手机竖屏/小红书）、`4:3` / `3:4`、`3:2` / `2:3`（经典摄影胶片）、`21:9`（电影级超宽银幕）、`9:21`（长图）、`2:1` / `1:2`；
+   - 默认走 `grok-imagine-image-quality` 引擎，兼顾极高画质与锐利文字排版；要海报级极限画质与文字渲染时选用 `grok-imagine-image-2.0`。
