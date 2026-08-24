@@ -15,8 +15,8 @@ for (const tool of registeredTools) {
     console.log(`- Tool: ${tool.name} (${tool.label}): ${tool.description}`);
 }
 
-if (registeredTools.length === 2) {
+if (registeredTools.length === 3) {
     console.log("All tools registered successfully!");
 } else {
-    throw new Error("Failed to register tools");
+    throw new Error(`Expected 3 registered tools, got ${registeredTools.length}`);
 }

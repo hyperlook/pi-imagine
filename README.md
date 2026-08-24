@@ -1,18 +1,31 @@
 # pi-imagine
 
-给 `pi` 用的出图 / 改图扩展。默认 payload 对齐 Grok Build：`grok-imagine-image-quality` + `1k` + `b64_json`。模型、分辨率、quality 仍可由 Agent 按用户意图覆盖。
+给 `pi` 用的生图、改图与高质量提示词检索扩展。默认 payload 对齐 Grok Build：`grok-imagine-image-quality` + `1k` + `b64_json`。模型、分辨率、quality 仍可由 Agent 按用户意图覆盖。
 
-技能 `imagine` 打在本包里，随扩展一起加载，只在 Pi 装了这套工具时出现。不要拷到 `~/.agents/skills/`：那个目录是跨 Agent 通用技能，OpenCode 等没有 `image_gen` 的工具加载了也没用。
+技能 `imagine` 打在本包里，随扩展一起加载，只在 Pi 装了这套工具时出现。内置 529+ 经过实测的高质量提示词画廊数据，供 Agent 快速检索最佳视觉范式并一键出图。
 
 ## 能力
 
+- **`search_prompt_cases`**：在 529+ 个实测黄金案例中按关键词、大类（UI、海报、电商、3D、写实、插画等）、风格与场景检索。返回包含材质、光学折射、排版规范和变量插槽（如 `[PRODUCT]`, `[COUNTRY]`）的完整 Prompt。
 - **`image_gen`**：文生图。可传 `aspect_ratio`、`resolution`（`1k`/`2k`）、`quality`（仅 2.0）、`model`、`output_path`。
 - **`image_edit`**：按参考图改图，参数规则相同。
 - **默认快档**：不传模型/分辨率时走 Grok Build 同款请求体，一次拿 base64，不再先拿 URL 再下载。
 - **意图升档**：写在工具 schema 里。没点名就省略 knobs；用户要精细/海报/2k 时 Agent 按 schema 覆盖。
-- **技能 `imagine`**：何时用代码画、怎么写 prompt、真人参考、多图一致性。不重复 schema 里的升档表。
+- **技能 `imagine`**：何时先检索黄金案例、怎么做参数化替换、多图一致性与出图规范。
 
 ## 工具
+
+### `search_prompt_cases`
+
+检索高质量提示词案例：
+
+```json
+{
+  "query": "水晶 海报 旅行",
+  "category": "Posters & Typography",
+  "limit": 3
+}
+```
 
 ### `image_gen`
 

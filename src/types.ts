@@ -66,6 +66,38 @@ export const ImageEditSchema = Type.Object({
 
 export type ImageEditInput = Static<typeof ImageEditSchema>;
 
+export const SearchPromptCasesSchema = Type.Object({
+    query: Type.Optional(Type.String({
+        description: "搜索关键词（如：'水晶 海报', '微缩 广告', 'UI 仪表盘', '国风 水彩', '3D 盲盒' 等）"
+    })),
+    category: Type.Optional(Type.String({
+        description: "按分类过滤，如：'UI & Interfaces', 'Charts & Infographics', 'Posters & Typography', 'Products & E-commerce', 'Characters & People', 'Illustration & Art', 'Photography & Realism', 'Architecture & Spaces', 'Scenes & Storytelling' 等"
+    })),
+    style: Type.Optional(Type.String({
+        description: "按视觉风格过滤，如：'3D', 'Realistic', 'Poster', 'UI', 'Illustration', 'Infographic', 'Classical' 等"
+    })),
+    scene: Type.Optional(Type.String({
+        description: "按应用场景过滤，如：'Commerce', 'Tech', 'Social', 'Story', 'Education', 'Fashion', 'Food', 'Travel' 等"
+    })),
+    limit: Type.Optional(Type.Integer({
+        description: "返回候选案例条数（默认 3，最大 10）",
+        minimum: 1,
+        maximum: 10
+    }))
+});
+
+export type SearchPromptCasesInput = Static<typeof SearchPromptCasesSchema>;
+
+export interface PromptCaseItem {
+    id: number;
+    title: string;
+    category: string;
+    styles: string[];
+    scenes: string[];
+    prompt: string;
+    image?: string;
+}
+
 export interface GeneratedImageItem {
     url?: string;
     b64_json?: string;
