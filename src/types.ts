@@ -9,11 +9,15 @@ export const AspectRatioEnum = Type.Union([
     Type.Literal("3:4"),
     Type.Literal("3:2"),
     Type.Literal("2:3"),
-    Type.Literal("21:9"),
-    Type.Literal("9:21"),
     Type.Literal("2:1"),
-    Type.Literal("1:2")
-], { description: "画面比例。默认 auto（模型根据提示词自动选择最佳比例）。可选：1:1（方形/头像）、16:9（横屏/壁纸）、9:16（竖屏/小红书/手机）、4:3、3:4、3:2、2:3、21:9（超宽电影银幕）、9:21（超长竖屏）、2:1、1:2。" });
+    Type.Literal("1:2"),
+    Type.Literal("19.5:9"),
+    Type.Literal("9:19.5"),
+    Type.Literal("20:9"),
+    Type.Literal("9:20"),
+    Type.Literal("21:9"),
+    Type.Literal("5:2")
+], { description: "画面比例。默认 auto（模型根据提示词自动选择最佳比例）。可选：1:1（方形/头像）、16:9 / 9:16（横屏/竖屏）、4:3 / 3:4、3:2 / 2:3（摄影）、2:1 / 1:2（横幅）、19.5:9 / 9:19.5（现代手机）、20:9 / 9:20（超宽）、21:9（电影超宽）、5:2。" });
 
 export const ResolutionEnum = Type.Union([
     Type.Literal("1k"),
