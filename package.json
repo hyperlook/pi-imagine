@@ -1,0 +1,48 @@
+{
+  "name": "pi-imagine",
+  "version": "1.0.0",
+  "description": "pi 出图/改图扩展：默认对齐 Grok Build payload，并可由 Agent 按意图选择模型与分辨率",
+  "type": "module",
+  "main": "src/index.ts",
+  "keywords": [
+    "pi",
+    "pi-extension",
+    "pi-package",
+    "image-generation",
+    "image-edit",
+    "grok",
+    "xai",
+    "imagine",
+    "dalle"
+  ],
+  "author": "look",
+  "license": "MIT",
+  "scripts": {
+    "test": "bun test tests/"
+  },
+  "files": [
+    "src",
+    "skills",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@earendil-works/pi-ai": "^0.80.3",
+    "@earendil-works/pi-coding-agent": "^0.80.3",
+    "@types/node": "^25.9.1",
+    "typebox": "^1.1.38",
+    "typescript": "^6.0.3"
+  },
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": ">=0.80.3",
+    "@earendil-works/pi-coding-agent": ">=0.80.3",
+    "typebox": "*"
+  }
+}
