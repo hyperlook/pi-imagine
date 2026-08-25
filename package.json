@@ -23,6 +23,7 @@
   "files": [
     "src",
     "skills",
+    "prompts",
     "README.md"
   ],
   "devDependencies": {
@@ -38,6 +39,9 @@
     ],
     "skills": [
       "./skills"
+    ],
+    "prompts": [
+      "./prompts"
     ]
   },
   "peerDependencies": {

@@ -11,7 +11,8 @@
 - **`image_edit`**：按参考图改图，参数规则相同。
 - **默认快档**：不传模型/分辨率时走 Grok Build 同款请求体，一次拿 base64，不再先拿 URL 再下载。
 - **意图升档**：写在工具 schema 里。没点名就省略 knobs；用户要精细/海报/2k 时 Agent 按 schema 覆盖。
-- **技能 `imagine`**：何时先检索黄金案例、怎么做参数化替换、多图一致性与出图规范。
+- **技能 `imagine` & `portrait-remaster`**：内置通用视觉工作流与专业人像重塑（分风格按需精准加载）技能。
+- **快捷模板 `prompts/`**：包含 `/photo-remaster` 等开箱即用的高频生图/改图指令。
 
 ## 工具
 
@@ -58,6 +59,17 @@
   "image": "./output/cyberpunk.jpg"
 }
 ```
+
+## 快捷指令 (Prompt Templates)
+
+本扩展内置快捷指令，随包自动加载：
+
+- **`/photo-remaster`**：将普通生活照/自拍重塑为摄影级大片（支持单反人像、电影写真、轻奢Ins、旅行大片、时尚杂志，以及保留原图背景的专业光影调色 6 种模式）。
+  - 用法示例：
+    - 默认单反人像：`/photo-remaster`
+    - 电影写真：`/photo-remaster 2 "cyberpunk neon cafe"`
+    - 原地调色提亮：`/photo-remaster 6 "warm golden hour film tone" ./my_photo.jpg`
+    - 旅行大片：`/photo-remaster 4 "Kyoto street in autumn with kimono" ./my_photo.jpg`
 
 ## 安装
 
