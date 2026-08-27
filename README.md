@@ -73,7 +73,30 @@
 
 ## 安装
 
-写入 `~/.pi/agent/settings.json`：
+### 方式 1：CLI 一键安装（推荐）
+
+由于是私人仓库，推荐使用 SSH 方式（自动使用本地 SSH Key）：
+
+```bash
+# 全局安装（写入 ~/.pi/agent/settings.json）
+pi install git:git@github.com:hyperlook/pi-imagine
+
+# 或 HTTPS 方式（需配置好 GitHub 凭据）
+pi install https://github.com/hyperlook/pi-imagine
+```
+
+临时体验（单次运行加载）：
+```bash
+pi -e git:git@github.com:hyperlook/pi-imagine
+```
+
+### 方式 2：本地路径安装
+
+```bash
+pi install /path/to/pi-imagine
+```
+
+或直接在 `~/.pi/agent/settings.json` 中配置：
 
 ```json
 {
@@ -83,4 +106,4 @@
 }
 ```
 
-若 `~/.agents/skills/imagine` 还在，Pi 会优先用那份并跳过包内技能。装了本包就删掉全局那份，避免撞名，也避免别的 Agent 加载一份废技能。
+> **提示**：若 `~/.agents/skills/imagine` 还在，Pi 会优先使用那份并跳过包内技能。装了本包建议删掉全局旧技能目录，避免撞名。
