@@ -85,20 +85,9 @@ export async function callEditImageApi(
     if (auth.provider === "xai") {
         const baseUrl = (auth.baseUrl || "https://api.x.ai/v1").replace(/\/+$/, "");
 
-        let imagePayload: any;
-        if (Array.isArray(params.image)) {
-            imagePayload = params.image.map((img) => ({
-                url: imageInputToDataUri(img),
-                type: "image_url"
-            }));
-        } else {
-            imagePayload = {
-                url: imageInputToDataUri(params.image),
-                type: "image_url"
-            };
-        }
-
-        const requestBody = buildXaiEditBody(params, imagePayload);
+        const imageRefs = (Array.isArray(params.image) ? params.image : [params.image])
+            .map((img) => ({ url: imageInputToDataUri(img) }));
+        const requestBody = buildXaiEditBody(params, imageRefs);
         const model = String(requestBody.model);
 
         const response = await fetch(`${baseUrl}/images/edits`, {

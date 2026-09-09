@@ -32,21 +32,38 @@ export function buildXaiGenerateBody(params: ImageGenInput): Record<string, unkn
     return body;
 }
 
+export type XaiImageRef = { url: string };
+
+/**
+ * xAI /images/edits: 单图走 `image` 对象，多图走互斥字段 `images` 数组。
+ * 与 Grok Build 及官方 REST 一致；把数组塞进 `image` 会 422。
+ */
 export function buildXaiEditBody(
     params: ImageEditInput,
-    imagePayload: unknown
+    imageRefs: XaiImageRef[]
 ): Record<string, unknown> {
+    if (imageRefs.length === 0) {
+        throw new Error("image_edit requires at least one reference image.");
+    }
+
     const model = resolveXaiImageModel(params.model);
     const body: Record<string, unknown> = {
         model,
         prompt: params.prompt,
-        image: imagePayload,
         resolution: params.resolution || DEFAULT_RESOLUTION,
         response_format: "b64_json"
     };
-    if (params.aspect_ratio && params.aspect_ratio !== "auto") {
-        body.aspect_ratio = params.aspect_ratio;
+
+    if (imageRefs.length === 1) {
+        body.image = imageRefs[0];
+        if (params.aspect_ratio && params.aspect_ratio !== "auto") {
+            body.aspect_ratio = params.aspect_ratio;
+        }
+    } else {
+        body.images = imageRefs;
+        body.aspect_ratio = params.aspect_ratio || DEFAULT_ASPECT_RATIO;
     }
+
     if (params.quality && isImagineImage2(model)) {
         body.quality = params.quality;
     }

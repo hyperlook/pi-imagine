@@ -27,7 +27,7 @@ export default function (pi: ExtensionAPI) {
     pi.registerTool({
         name: IMAGE_EDIT_TOOL,
         label: "Image Edit",
-        description: "用文本改已有图或参考图（Grok Imagine）。接受本地路径、URL 或 data URI。分辨率/模型规则与 image_gen 相同。",
+        description: "用文本改已有图或参考图（Grok Imagine）。可传 1–5 张参考图（第一张为主体，Prompt 用 <IMAGE_0>、<IMAGE_1> 指代）。接受本地路径、URL 或 data URI。分辨率/模型规则与 image_gen 相同。",
         parameters: ImageEditSchema,
         execute: imageEdit
     });

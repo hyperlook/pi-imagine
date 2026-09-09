@@ -53,13 +53,17 @@ export type ImageGenInput = Static<typeof ImageGenSchema>;
 
 export const ImageEditSchema = Type.Object({
     prompt: Type.String({
-        description: "改图说明：写清要变什么、什么保持不变。"
+        description: "改图说明：写清要变什么、什么保持不变。多图时用 <IMAGE_0>、<IMAGE_1> 指代各参考图。"
     }),
     image: Type.Union([
         Type.String({ description: "参考图：本地路径、URL 或 data URI" }),
-        Type.Array(Type.String(), { description: "多张参考图路径或 URL（最多 3 张）" })
+        Type.Array(Type.String(), {
+            description: "多张参考图（最多 5 张）。第一张是主体/身份锚点，其余为服装、风格或场景参考。Prompt 用 <IMAGE_0>、<IMAGE_1> 指代。",
+            minItems: 1,
+            maxItems: 5
+        })
     ], {
-        description: "一张或多张参考图，本地路径、公开 URL 或 base64 data URI"
+        description: "一张或多张参考图（最多 5 张），本地路径、公开 URL 或 base64 data URI。多图时第一张为主体。"
     }),
     aspect_ratio: Type.Optional(AspectRatioEnum),
     resolution: Type.Optional(ResolutionEnum),
